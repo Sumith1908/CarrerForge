@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/Sumith1908/CarrerForge.git'
+                git branch: 'new_master', url: 'https://github.com/Sumith1908/CarrerForge.git'
             }
         }
         stage('Run Tests (Backend)') {
