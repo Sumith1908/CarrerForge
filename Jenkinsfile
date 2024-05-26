@@ -60,23 +60,6 @@ pipeline {
                 }
             }
         }
-        stage('Cleanup') {
-            steps {
-                script {
-                    // Stop and remove existing containers
-                    sh 'docker-compose -f docker-compose.yaml down'
-                    sh '''
-                        docker rm -f login-backend || true
-                        docker rm -f login-frontend || true
-                        docker rm -f company-service || true
-                        docker rm -f admin-service || true
-                        docker rm -f elastic || true
-                        docker rm -f kibana || true
-                        docker rm -f logstash || true
-                    '''
-                }
-            }
-        }
        stage('Deploy with Ansible') {
             steps {
                 sh 'ansible-playbook -i inventory.ini playbook.yml'
