@@ -1,0 +1,36 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    - name: Create project directory
+      file:
+        path: /project
+        state: directory
+        mode: 0755
+
+    - name: Check out project files from GitHub
+      git:
+        repo: https://github.com/Sumith1908/CarrerForge.git
+        dest: /project
+        force: yes
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Build and start containers
+      docker_compose:
+        project_src: /project
+        build: yes
+        state: present

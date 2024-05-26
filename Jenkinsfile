@@ -77,13 +77,9 @@ pipeline {
                 }
             }
         }
-        stage('Deploy with Docker Compose') {
+       stage('Deploy with Ansible') {
             steps {
-                script {
-                    // sh 'docker-compose pull'
-                    // sh 'docker-compose up -d'  # Start all services in docker-compose.yml
-                    sh "docker-compose up -d" 
-                }
+                sh 'ansible-playbook -i inventory.ini playbook.yml'
             }
         }
     }
